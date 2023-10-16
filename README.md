@@ -1,8 +1,8 @@
 # Neural-Network
 
-# Lab01
+## Lab01
 
-## Ogólny przegląd danych
+#### Ogólny przegląd danych
 
 Additional Information
 
@@ -16,27 +16,7 @@ wartości liczbowe atrybutu num:
 -0 brak oznak choroby
 -1,2,3,4 występujące oznaki choroby
 
-```python
-# variable information
-variable_info = heart_disease.variables
-variable_info
-```
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -195,25 +175,8 @@ variable_info
 </table>
 </div>
 
-```python
-X
-```
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
+    X
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -412,25 +375,11 @@ X
     </tr>
   </tbody>
 </table>
-<p>303 rows × 13 columns</p>
 </div>
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
+y
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -488,23 +437,14 @@ X
 <p>303 rows × 1 columns</p>
 </div>
 
-## 1.Czy zbiór jest zbalansowany pod względem liczby próbek na klasy?
-    num
-    0      164
-    1       55
-    2       36
-    3       35
-    4       13
-    Name: count, dtype: int64
+#### 1.Czy zbiór jest zbalansowany pod względem liczby próbek na klasy?
 
-
-    <Axes: ylabel='num'>
-
-![png](./media/Lab01_files/Lab02_11_1.png)
-
-    <Axes: ylabel='count'>
-
-![png](./media/Lab01_files/Lab02_12_1.png)
+<table>
+  <tr>
+    <td><img src="./media/Lab01_files/Lab02_11_1.png" alt="Obraz 1"></td>
+    <td><img src="./media/Lab01_files/Lab02_12_1.png" alt="Obraz 2"></td>
+  </tr>
+</table>
 
 Można zauważyć, że najwięcej przypadków jest dla wartości 0, która stanowi ponad połowę wszystkich wartości, jeśli
 chodzi o pozostałe, przypadek 1 posiada również duży wkład, 2 i 3 mają prawie taką samą częstotliwość na poziomie
@@ -513,47 +453,17 @@ ok.12%, przypadek 4 jest najmniej liczny i stanowi niecałe 5%.
 Odpowiedź:
 Zbiór danych nie jest najlepiej zbalansowany, ponieważ niektóre klasy mają znacznie więcej próbek niż inne.
 
-```python
-no_presence = y[y==0].count().sum()
-presence = y[y!=0].count().sum()
-presence,no_presence
-```
-
-    (139, 164)
-
-```python
-# Create a bar chart
-plt.bar(['No Presence', 'Presence'], [no_presence, presence])
-plt.xlabel('Class')
-plt.ylabel('Count')
-plt.title('Bar Chart: No Presence vs. Presence')
-```
-
-    Text(0.5, 1.0, 'Bar Chart: No Presence vs. Presence')
-
-![png](./media/Lab01_files/Lab02_16_1.png)
-
-```python
-labels = ['No Presence', 'Presence']
-sizes = [no_presence, presence]
-plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
-plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-plt.title('Pie Chart: No Presence vs. Presence')
-```
-
-    Text(0.5, 1.0, 'Pie Chart: No Presence vs. Presence')
-
-![png](./media/Lab01_files/Lab02_17_1.png)
+<table>
+  <tr>
+    <td><img src="./media/Lab01_files/Lab02_16_1.png" alt="Obraz 1"></td>
+    <td><img src="./media/Lab01_files/Lab02_17_1.png" alt="Obraz 2"></td>
+  </tr>
+</table>
 
 Jeśli jednak pójść dalej i zobaczyć na wartości atrybutu num w perspektywie - 'ma objawy' 'nie ma objawow', rozkład
 będzie bardziej zbalansowany.
 
-## 2. Jakie są średnie i odchylenia cech liczbowych?
-
-```python
-numeric_variables = variable_info[(variable_info['type']=='Integer') & (variable_info['name']!='num')]['name']
-numeric_variables
-```
+#### 2. Jakie są średnie i odchylenia cech liczbowych?
 
     0          age
     3     trestbps
@@ -564,20 +474,6 @@ numeric_variables
     Name: name, dtype: object
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -613,139 +509,8 @@ numeric_variables
 </table>
 </div>
 
-## 3. Dla cech liczbowych: czy ich rozkład jest w przybliżeniu normalny?
+#### 3. Dla cech liczbowych: czy ich rozkład jest w przybliżeniu normalny?
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>trestbps</th>
-      <th>chol</th>
-      <th>thalach</th>
-      <th>oldpeak</th>
-      <th>ca</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>145</td>
-      <td>233</td>
-      <td>150</td>
-      <td>2.3</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>160</td>
-      <td>286</td>
-      <td>108</td>
-      <td>1.5</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>120</td>
-      <td>229</td>
-      <td>129</td>
-      <td>2.6</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>130</td>
-      <td>250</td>
-      <td>187</td>
-      <td>3.5</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>130</td>
-      <td>204</td>
-      <td>172</td>
-      <td>1.4</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>45</td>
-      <td>110</td>
-      <td>264</td>
-      <td>132</td>
-      <td>1.2</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>68</td>
-      <td>144</td>
-      <td>193</td>
-      <td>141</td>
-      <td>3.4</td>
-      <td>2.0</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>57</td>
-      <td>130</td>
-      <td>131</td>
-      <td>115</td>
-      <td>1.2</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>57</td>
-      <td>130</td>
-      <td>236</td>
-      <td>174</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>38</td>
-      <td>138</td>
-      <td>175</td>
-      <td>173</td>
-      <td>0.0</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 6 columns</p>
-</div>
 
 ![png](./media/Lab01_files/Lab02_25_0.png)
 
@@ -782,12 +547,8 @@ Można z tego wyciągnąć, że atrybuty:
 
 mają rozkład podobny do normalnego.
 
-## 4. Dla cech kategorycznych: czy rozkład jest w przybliżeniu równomierny?
+#### 4. Dla cech kategorycznych: czy rozkład jest w przybliżeniu równomierny?
 
-```python
-categorical_variables = variable_info[(variable_info['type']=='Categorical')]['name']
-categorical_variables
-```
 
     1         sex
     2          cp
@@ -798,26 +559,8 @@ categorical_variables
     12       thal
     Name: name, dtype: object
 
-```python
-categorical_df = X[categorical_variables]
-categorical_df
-```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -947,28 +690,16 @@ categorical_df
 <p>303 rows × 7 columns</p>
 </div>
 
-```python
-for column in categorical_df.columns:
-    plt.figure(figsize=(6, 6))
-    categorical_df[column].value_counts().plot(kind='pie', autopct='%1.1f%%')
-    plt.title(f'Pie Chart for {column}')
-    plt.ylabel('')
-    plt.show()
-```
+| Obraz 1 | Obraz 2 |
+|---------|---------|
+| ![Obraz 1](./media/Lab01_files/Lab02_32_0.png) | ![Obraz 2](./media/Lab01_files/Lab02_32_1.png) |
+| Obraz 3 | Obraz 4 |
+| ![Obraz 3](./media/Lab01_files/Lab02_32_2.png) | ![Obraz 4](./media/Lab01_files/Lab02_32_3.png) |
+| Obraz 5 | Obraz 6 |
+| ![Obraz 5](./media/Lab01_files/Lab02_32_4.png) | ![Obraz 6](./media/Lab01_files/Lab02_32_5.png) |
+| Obraz 7 |
+| ![Obraz 7](./media/Lab01_files/Lab02_32_6.png) |
 
-![png](./media/Lab01_files/Lab02_32_0.png)
-
-![png](./media/Lab01_files/Lab02_32_1.png)
-
-![png](./media/Lab01_files/Lab02_32_2.png)
-
-![png](./media/Lab01_files/Lab02_32_3.png)
-
-![png](./media/Lab01_files/Lab02_32_4.png)
-
-![png](./media/Lab01_files/Lab02_32_5.png)
-
-![png](./media/Lab01_files/Lab02_32_6.png)
 
 Rozkład wartości atrybutów kategorycznych jest różny, w większości przypadków nierównomierny, zależnie od atrybutu.
 w niektórych przypadkach jest spora dysproporcja w danych, ale przeważnie dla jednego z 3 przypadków.
@@ -976,11 +707,8 @@ np. **thal,slope,restec**
 W przypadku **sex, fbs** znacznie przeważa jedna kategoria.
 Najbardziej równomierny jest zbiór **cp**
 
-## 5. Czy występują cechy brakujące i jaką strategię możemy zastosować żeby je zastąpić?
-
-```python
-X.isnull().sum().sort_values(ascending=False)
-```
+#### 5. Czy występują cechy brakujące i jaką strategię możemy zastosować żeby je zastąpić?
+Dla X:
 
     ca          4
     thal        2
@@ -996,894 +724,13 @@ X.isnull().sum().sort_values(ascending=False)
     oldpeak     0
     slope       0
     dtype: int64
-
-```python
-y.isnull().sum()
-```
+Dla y:
 
     num    0
     dtype: int64
 
-W przypadku **ca** uzupełnię brakujące wartości średnią. Ponieważ jest to wartość numeryczna. W przypadku **thal**
+W przypadku **ca** uzupełnię brakujące wartości modą. Ponieważ jest to wartość numeryczna lecz przyjmuje wartości dyskretne. W przypadku **thal**
 uzupełnię je modą, ponieważ jest to atrybut kategoryczny.
-
-```python
-X
-```
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>cp</th>
-      <th>trestbps</th>
-      <th>chol</th>
-      <th>fbs</th>
-      <th>restecg</th>
-      <th>thalach</th>
-      <th>exang</th>
-      <th>oldpeak</th>
-      <th>slope</th>
-      <th>ca</th>
-      <th>thal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>1</td>
-      <td>1</td>
-      <td>145</td>
-      <td>233</td>
-      <td>1</td>
-      <td>2</td>
-      <td>150</td>
-      <td>0</td>
-      <td>2.3</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>1</td>
-      <td>4</td>
-      <td>160</td>
-      <td>286</td>
-      <td>0</td>
-      <td>2</td>
-      <td>108</td>
-      <td>1</td>
-      <td>1.5</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>1</td>
-      <td>4</td>
-      <td>120</td>
-      <td>229</td>
-      <td>0</td>
-      <td>2</td>
-      <td>129</td>
-      <td>1</td>
-      <td>2.6</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>1</td>
-      <td>3</td>
-      <td>130</td>
-      <td>250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>187</td>
-      <td>0</td>
-      <td>3.5</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>0</td>
-      <td>2</td>
-      <td>130</td>
-      <td>204</td>
-      <td>0</td>
-      <td>2</td>
-      <td>172</td>
-      <td>0</td>
-      <td>1.4</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>45</td>
-      <td>1</td>
-      <td>1</td>
-      <td>110</td>
-      <td>264</td>
-      <td>0</td>
-      <td>0</td>
-      <td>132</td>
-      <td>0</td>
-      <td>1.2</td>
-      <td>2</td>
-      <td>0.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>68</td>
-      <td>1</td>
-      <td>4</td>
-      <td>144</td>
-      <td>193</td>
-      <td>1</td>
-      <td>0</td>
-      <td>141</td>
-      <td>0</td>
-      <td>3.4</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>57</td>
-      <td>1</td>
-      <td>4</td>
-      <td>130</td>
-      <td>131</td>
-      <td>0</td>
-      <td>0</td>
-      <td>115</td>
-      <td>1</td>
-      <td>1.2</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>57</td>
-      <td>0</td>
-      <td>2</td>
-      <td>130</td>
-      <td>236</td>
-      <td>0</td>
-      <td>2</td>
-      <td>174</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>38</td>
-      <td>1</td>
-      <td>3</td>
-      <td>138</td>
-      <td>175</td>
-      <td>0</td>
-      <td>0</td>
-      <td>173</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>3.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 13 columns</p>
-</div>
-
-```python
-most_frequent_number_of_v = X['ca'].mode().iloc[0]
-X.loc[:, 'ca'] = X['ca'].fillna(most_frequent_number_of_v)
-most_frequent_category = X['thal'].mode().iloc[0]
-X.loc[:, 'thal'] = X['thal'].fillna(most_frequent_category)
-X.isnull().sum().sort_values(ascending=False)
-```
-
-    age         0
-    sex         0
-    cp          0
-    trestbps    0
-    chol        0
-    fbs         0
-    restecg     0
-    thalach     0
-    exang       0
-    oldpeak     0
-    slope       0
-    ca          0
-    thal        0
-    dtype: int64
-
-## 6. kod przekształcający dane do macierzy cech liczbowych (przykłady × cechy).
-
-```python
-df = pd.get_dummies(X, columns=['cp', 'restecg', 'slope', 'thal'],
-                              prefix=['cp', 'restecg', 'slope', 'thal']).astype('int64')
-df
-```
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>trestbps</th>
-      <th>chol</th>
-      <th>fbs</th>
-      <th>thalach</th>
-      <th>exang</th>
-      <th>oldpeak</th>
-      <th>ca</th>
-      <th>cp_1</th>
-      <th>...</th>
-      <th>cp_4</th>
-      <th>restecg_0</th>
-      <th>restecg_1</th>
-      <th>restecg_2</th>
-      <th>slope_1</th>
-      <th>slope_2</th>
-      <th>slope_3</th>
-      <th>thal_3.0</th>
-      <th>thal_6.0</th>
-      <th>thal_7.0</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>1</td>
-      <td>145</td>
-      <td>233</td>
-      <td>1</td>
-      <td>150</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>1</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>1</td>
-      <td>160</td>
-      <td>286</td>
-      <td>0</td>
-      <td>108</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>1</td>
-      <td>120</td>
-      <td>229</td>
-      <td>0</td>
-      <td>129</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>1</td>
-      <td>130</td>
-      <td>250</td>
-      <td>0</td>
-      <td>187</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>0</td>
-      <td>130</td>
-      <td>204</td>
-      <td>0</td>
-      <td>172</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>45</td>
-      <td>1</td>
-      <td>110</td>
-      <td>264</td>
-      <td>0</td>
-      <td>132</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>68</td>
-      <td>1</td>
-      <td>144</td>
-      <td>193</td>
-      <td>1</td>
-      <td>141</td>
-      <td>0</td>
-      <td>3</td>
-      <td>2</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>57</td>
-      <td>1</td>
-      <td>130</td>
-      <td>131</td>
-      <td>0</td>
-      <td>115</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>...</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>57</td>
-      <td>0</td>
-      <td>130</td>
-      <td>236</td>
-      <td>0</td>
-      <td>174</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>38</td>
-      <td>1</td>
-      <td>138</td>
-      <td>175</td>
-      <td>0</td>
-      <td>173</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 22 columns</p>
-</div>
-
-# Lab02 Prosta klasyfikacja
-
-```python
-X
-```
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>cp</th>
-      <th>trestbps</th>
-      <th>chol</th>
-      <th>fbs</th>
-      <th>restecg</th>
-      <th>thalach</th>
-      <th>exang</th>
-      <th>oldpeak</th>
-      <th>slope</th>
-      <th>ca</th>
-      <th>thal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>1</td>
-      <td>1</td>
-      <td>145</td>
-      <td>233</td>
-      <td>1</td>
-      <td>2</td>
-      <td>150</td>
-      <td>0</td>
-      <td>2.3</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>1</td>
-      <td>4</td>
-      <td>160</td>
-      <td>286</td>
-      <td>0</td>
-      <td>2</td>
-      <td>108</td>
-      <td>1</td>
-      <td>1.5</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>1</td>
-      <td>4</td>
-      <td>120</td>
-      <td>229</td>
-      <td>0</td>
-      <td>2</td>
-      <td>129</td>
-      <td>1</td>
-      <td>2.6</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>1</td>
-      <td>3</td>
-      <td>130</td>
-      <td>250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>187</td>
-      <td>0</td>
-      <td>3.5</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>0</td>
-      <td>2</td>
-      <td>130</td>
-      <td>204</td>
-      <td>0</td>
-      <td>2</td>
-      <td>172</td>
-      <td>0</td>
-      <td>1.4</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>45</td>
-      <td>1</td>
-      <td>1</td>
-      <td>110</td>
-      <td>264</td>
-      <td>0</td>
-      <td>0</td>
-      <td>132</td>
-      <td>0</td>
-      <td>1.2</td>
-      <td>2</td>
-      <td>0.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>68</td>
-      <td>1</td>
-      <td>4</td>
-      <td>144</td>
-      <td>193</td>
-      <td>1</td>
-      <td>0</td>
-      <td>141</td>
-      <td>0</td>
-      <td>3.4</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>57</td>
-      <td>1</td>
-      <td>4</td>
-      <td>130</td>
-      <td>131</td>
-      <td>0</td>
-      <td>0</td>
-      <td>115</td>
-      <td>1</td>
-      <td>1.2</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>57</td>
-      <td>0</td>
-      <td>2</td>
-      <td>130</td>
-      <td>236</td>
-      <td>0</td>
-      <td>2</td>
-      <td>174</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>2</td>
-      <td>1.0</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>38</td>
-      <td>1</td>
-      <td>3</td>
-      <td>138</td>
-      <td>175</td>
-      <td>0</td>
-      <td>0</td>
-      <td>173</td>
-      <td>0</td>
-      <td>0.0</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>3.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 13 columns</p>
-</div>
-
-```python
-y = y.map(lambda x: 1 if x in (1,2,3,4) else 0)
-y
-```
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>num</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>298</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>299</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>303 rows × 1 columns</p>
-</div>
-
-# Export przeanalizowanych i uzupelnionych plikow do csv
-
-```python
-from pathlib import Path
-```
-
-```python
-csv_X_path = Path('../Dataset/X.csv')
-csv_y_path = Path('../Dataset/y.csv')
-```
-
-```python
-X.to_csv(csv_X_path,index=False)
-y.to_csv(csv_y_path,index=False)
-```
 
 ## Lab02
 
@@ -2076,4 +923,4 @@ Preprocessing też odgrywa ważną rolę w tym jak sprawuje się model.
 
 Nawet taki prosty model może sobie dobrze radzić z binarną klasyfikacją.
 
-## Lab03
+#### Lab03
