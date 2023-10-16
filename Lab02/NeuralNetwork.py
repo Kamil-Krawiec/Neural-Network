@@ -1,3 +1,4 @@
+import os
 import random
 
 import matplotlib.pyplot as plt
@@ -126,6 +127,7 @@ class NeuralNetwork:
         plt.xlabel("Iterations")
         plt.ylabel("Cost")
         plt.title("Training Cost for " + self.name)
+        self.save_chart()
         plt.show()
 
     def show_metrics(self, test_accuracy, test_precision, test_recall, test_f1):
@@ -143,4 +145,16 @@ class NeuralNetwork:
         plt.ylabel("Metric Value")
         plt.title("Training Metrics for " + self.name)
         plt.legend()
+        self.save_chart()
         plt.show()
+
+    def save_chart(self):
+        plot_name = f"../media/{self.name.split(' ')[0]}"
+        index = 1
+
+        while os.path.exists(f"{plot_name}_{index}.png"):
+            index += 1
+
+        new_name = f"{plot_name}_{index}.png"
+        plt.savefig(new_name)
+
