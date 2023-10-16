@@ -115,28 +115,11 @@ Wyniki uczenia dla parametrow i hiperparametrów:
     num_of_iterations_basic = 400
     batch_size = 100
 
-![A graph with a line Description automatically
-generated](media/basic_data_1.png){width="1.5384612860892388in"
-height="1.1545067804024496in"}![A graph with colored lines and white
-text Description automatically
-generated](media/basic_data_2.png){width="1.5538462379702538in"
-height="1.1727012248468942in"}![A graph with a line Description
-automatically generated](media/basic_data_3.png){width="1.5769225721784776in"
-height="1.1923884514435696in"}![A graph of a training metrics
-Description automatically
-generated](media/basic_data_4.png){width="1.5307688101487313in"
-height="1.1597047244094487in"}
-
-![A graph with blue lines Description automatically
-generated](media/basic_data_5.png){width="1.561538713910761in"
-height="1.1800634295713035in"}![A graph of different colored lines
-Description automatically
-generated](media/basic_data_6.png){width="1.561537620297463in"
-height="1.1771216097987751in"}![A graph with a line Description
-automatically generated](media/basic_data_7.png){width="1.6020122484689414in"
-height="1.2in"}![A graph of a training metrics Description automatically
-generated](media/basic_data_8.png){width="1.6in"
-height="1.1968974190726158in"}
+| Obraz 1                            | Obraz 2                            | Obraz 3                            | Obraz 4                            |
+|------------------------------------|------------------------------------|------------------------------------|------------------------------------|
+| ![Obraz 1](media/basic_data_1.png) | ![Obraz 2](media/basic_data_2.png) | ![Obraz 3](media/basic_data_3.png) | ![Obraz 4](media/basic_data_4.png) |
+| Obraz 5                            | Obraz 6                            | Obraz 7                            | Obraz 8                            |
+| ![Obraz 5](media/basic_data_5.png) | ![Obraz 6](media/basic_data_6.png) | ![Obraz 7](media/basic_data_7.png) | ![Obraz 8](media/basic_data_8.png) |
 
 Możemy stąd zauważyć, że dane paczkowane, mają lepszy wynik ale są mniej
 stabilne jeśli chodzi o metryki i proces uczenia.
@@ -147,62 +130,28 @@ Najlepsza
 
 **Dane poddane dyskretyzacji:**
 
-  learning_rate_discrete_without_b = 0.0005/
-  learning_rate_discrete_with_b = 0.0005/
-  batch_size = 64/
-  num_of_iterations_discretization = 60
+learning_rate_discrete_without_b = 0.0005/
+learning_rate_discrete_with_b = 0.0005/
+batch_size = 64/
+num_of_iterations_discretization = 60
 
-![A graph with a line Description automatically
-generated](media/discretize_data_1.png){width="1.5384612860892388in"
-height="1.1545067804024496in"}![A graph with colored lines and white
-text Description automatically
-generated](media/discretize_data_2.png){width="1.5538462379702538in"
-height="1.1727012248468942in"}![A graph with a line Description
-automatically generated](media/discretize_data_3.png){width="1.5769225721784776in"
-height="1.1923884514435696in"}![A graph of a training metrics
-Description automatically
-generated](media/discretize_data_4.png){width="1.5307688101487313in"
-height="1.1597047244094487in"}
-
-![A graph with blue lines Description automatically
-generated](media/discretize_data_5.png){width="1.561538713910761in"
-height="1.1800634295713035in"}![A graph of different colored lines
-Description automatically
-generated](media/discretize_data_6.png){width="1.561537620297463in"
-height="1.1771216097987751in"}![A graph with a line Description
-automatically generated](media/discretize_data_7.png){width="1.6020122484689414in"
-height="1.2in"}![A graph of a training metrics Description automatically
-generated](media/discretize_data_8.png){width="1.6in"
-height="1.1968974190726158in"}
-
+| Obraz 1                                 | Obraz 2                                 | Obraz 3                                 | Obraz 4                                 |
+|-----------------------------------------|-----------------------------------------|-----------------------------------------|-----------------------------------------|
+| ![Obraz 1](media/discretize_data_1.png) | ![Obraz 2](media/discretize_data_2.png) | ![Obraz 3](media/discretize_data_3.png) | ![Obraz 4](media/discretize_data_4.png) |
+| Obraz 5                                 | Obraz 6                                 | Obraz 7                                 | Obraz 8                                 |
+| ![Obraz 5](media/discretize_data_5.png) | ![Obraz 6](media/discretize_data_6.png) | ![Obraz 7](media/discretize_data_7.png) | ![Obraz 8](media/discretize_data_8.png) |
 
 **Dane poddane normalizacji:**
-  learning_rate_normalization_without_b = 0.001\
-  learning_rate_normalization_with_b = 0.001\
-  num_of_iterations_normalization = 200\
-  batch_size= 128
+learning_rate_normalization_without_b = 0.001\
+learning_rate_normalization_with_b = 0.001\
+num_of_iterations_normalization = 200\
+batch_size= 128
 
-![A graph with a line Description automatically
-generated](media/normalize_data_1.png){width="1.813377077865267in"
-height="1.3384612860892389in"}![A graph of different colored lines
-Description automatically
-generated](media/normalize_data_2.png){width="1.769628171478565in"
-height="1.3230774278215223in"}![A graph of a training cost Description
-automatically generated](media/normalize_data_3.png){width="1.7570931758530184in"
-height="1.3153849518810148in"}![A graph of a training metrics
-Description automatically
-generated](media/normalize_data_4.png){width="1.7414840332458443in"
-height="1.3076924759405075in"}![A graph with a line Description
-automatically generated](media/normalize_data_5.png){width="1.7569444444444444in"
-height="1.3218219597550307in"}![A graph of a training metrics
-Description automatically generated with medium
-confidence](media/normalize_data_6.png){width="1.8051049868766404in"
-height="1.3461537620297463in"}![A graph with a line Description
-automatically generated](media/normalize_data_7.png){width="1.7665955818022747in"
-height="1.3307699037620297in"}![A graph of a training metrics
-Description automatically
-generated](media/normalize_data_8.png){width="1.7742454068241469in"
-height="1.3307688101487314in"}
+| Obraz 1                                | Obraz 2                                | Obraz 3                                | Obraz 4                                |
+|----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+| ![Obraz 1](media/normalize_data_1.png) | ![Obraz 2](media/normalize_data_2.png) | ![Obraz 3](media/normalize_data_3.png) | ![Obraz 4](media/normalize_data_4.png) |
+| Obraz 5                                | Obraz 6                                | Obraz 7                                | Obraz 8                                |
+| ![Obraz 5](media/normalize_data_5.png) | ![Obraz 6](media/normalize_data_6.png) | ![Obraz 7](media/normalize_data_7.png) | ![Obraz 8](media/normalize_data_8.png) |
 
 W tym przypadku możemy zauważyć, że jest zdecydowanie mniej iteracji bo
 tylko 60 i model się stabilizuje, w przypadku paczkowania pomimo braku
