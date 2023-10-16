@@ -178,8 +178,8 @@ Dobranie odpowiednich parametrów i hiperparametrów odgrywa kluczową rolę
 w powodzeniu modelu. Jest to ciężkie bez znajomości metod na znalezienie
 optmalnych współczynników, trzeba sprawdzać to metodą prób i błędów.
 
-## Lab03
 Preprocessing też odgrywa ważną rolę w tym jak sprawuje się model.
 
 Nawet taki prosty model może sobie dobrze radzić z binarną klasyfikacją.
 
+## Lab03
