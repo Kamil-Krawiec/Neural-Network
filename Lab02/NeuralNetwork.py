@@ -149,7 +149,7 @@ class NeuralNetwork:
         plt.show()
 
     def save_chart(self):
-        plot_name = f"../media/{self.name.split(' ')[0]}"
+        plot_name = f"../media/Lab02_files/{self.name.split(' ')[0]}"
         index = 1
 
         while os.path.exists(f"{plot_name}_{index}.png"):

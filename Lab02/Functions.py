@@ -10,6 +10,14 @@ def compute_metrics(y_true, y_pred):
     return accuracy, precision, recall, f1
 
 
+def compute_metrics_one_hot(y_test, y_pred):
+    accuracy = accuracy_score(y_test, y_pred)
+    # Ustaw zero_division=0 w precision_score
+    precision = precision_score(y_test, y_pred, average='macro', zero_division=0)
+    recall = recall_score(y_test, y_pred, average='macro')
+    f1 = f1_score(y_test, y_pred, average='macro')
+
+    return accuracy, precision, recall, f1
 def normalize_data(X_train, X_test):
     # Inicjalizacja obiektu do normalizacji
     scaler = StandardScaler()

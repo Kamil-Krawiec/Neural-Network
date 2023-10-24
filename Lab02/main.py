@@ -85,7 +85,8 @@ def with_X_method(X, y, method, learning_rate=0.01, num_of_iterations=1000, fit_
 
 if __name__ == "__main__":
     X = pd.read_csv('../Dataset/X.csv')
-    y = pd.read_csv('../Dataset/y.csv').values
+    y = pd.read_csv('../Dataset/y.csv')
+    y = y.map(lambda x: 1 if x in (1, 2, 3, 4) else 0).values
     test_X_distribution(Distribution.NORMAL)
     test_X_distribution(Distribution.DISCRETE)
     test_X_distribution(Distribution.NONE)
