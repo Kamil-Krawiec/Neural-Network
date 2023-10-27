@@ -1,29 +1,27 @@
 import os
 
-import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import pyplot as plt
 from scipy.special import expit
+
 from Lab02.Functions import compute_metrics_one_hot
 
 
 class MLPClassifier:
-    def __init__(self, input_size, hidden_size, output_size, num_iterations=1000, learning_rate=0.03):
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.output_size = output_size
+    def __init__(self, layer_sizes, num_iterations=1000, learning_rate=0.03, name='Basic'):
+        self.layer_sizes = layer_sizes
         self.num_iterations = num_iterations
         self.learning_rate = learning_rate
-
-        # Inicjalizacja wag i biasów
-        self.W1 = np.random.rand(input_size, hidden_size)
-        self.b1 = np.random.rand(1, hidden_size)
-        self.W2 = np.random.rand(hidden_size, output_size)
-        self.b2 = np.random.rand(1, output_size)
+        self.weights = [np.random.rand(layer_sizes[i], layer_sizes[i + 1]) for i in range(len(layer_sizes) - 1)]
+        self.biases = [np.random.rand(1, size) for size in layer_sizes[1:]]
+        self.scores_history = []
+        self.cost_history = []
+        self.name = name
 
     def sigmoid(self, x):
         return expit(x)
 
-    def sigmoid_derivative(self,x):
+    def sigmoid_derivative(self, x):
         fx = self.sigmoid(x)
         return fx * (1 - fx)
 
@@ -37,56 +35,112 @@ class MLPClassifier:
         loss = -np.sum(y_true * np.log(y_pred)) / len(y_true)
         return loss
 
+    '''
+    Przy przejściu w przód, musimy zapisywać wartość wektora x na potrzeby
+    późniejszego przejścia po operacjach wstecz
+    
+    Jest to robione za pomoca tablicy activations ktora zapisuje wyjscia z poszczegolnych warstw
+    '''
+
     def forward_propagation(self, X):
-        # Oblicz wyjście z warstwy ukrytej
-        z1 = np.dot(X, self.W1) + self.b1
-        a1 = self.sigmoid(z1)
+        activations = [X]
 
-        # Oblicz wyjście z warstwy wyjściowej
-        z2 = np.dot(a1, self.W2) + self.b2
-        a2 = self.softmax(z2)
+        for i in range(len(self.layer_sizes) - 1):
+            z = np.dot(activations[-1], self.weights[i]) + self.biases[i]
+            a = self.sigmoid(z) if i < len(self.layer_sizes) - 2 else self.softmax(z)
+            activations.append(a)
 
-        return a1, a2
+        return activations
 
-    def backward_propagation(self, a1, a2, y):
-        delta2 = y - a2
+    '''
+    Przy przejściu w przód, musimy zapisywać wartość wektora x na potrzeby
+    późniejszego przejścia po operacjach wstecz
 
-        # Oblicz błędy dla jednostek ukrytych z wykorzystaniem sigmoid_derivative
-        delta1 = (delta2.dot(self.W2.T)) * self.sigmoid_derivative(a1)
+    Jest to robione za pomoca tablicy activations ktora zapisuje wyjscia z poszczegolnych warstw
+    '''
 
-        return delta1, delta2
+    def backward_propagation(self, activations, y):
+        num_layers = len(self.layer_sizes)
+        deltas = [None] * (num_layers - 1)
+        deltas[-1] = y - activations[-1]
 
-    def update_weights(self, X, a1, delta1, delta2):
+        for i in range(num_layers - 2, 0, -1):
+            deltas[i - 1] = (deltas[i].dot(self.weights[i].T)) * self.sigmoid_derivative(activations[i])
 
-        self.W2 += a1.T.dot(delta2) * self.learning_rate
-        self.b2 += np.sum(delta2, axis=0, keepdims=True) * self.learning_rate
+        return deltas
 
-        self.W1 += X.T.dot(delta1) * self.learning_rate
-        self.b1 += np.sum(delta1, axis=0, keepdims=True) * self.learning_rate
+    def update_weights(self, activations, deltas):
+        for i in range(len(self.layer_sizes) - 1):
+            self.weights[i] += np.dot(activations[i].T, deltas[i]) * self.learning_rate
+            self.biases[i] += np.sum(deltas[i], axis=0, keepdims=True) * self.learning_rate
+
+    '''
+    W obrębie backward, jeżeli korzystamy z uczonych parametrów modelu,
+    powinniśmy wyliczyć i zapisać gradient – pochodne cząstkowe po tych
+    parametrach
+    
+    Funkcja update_weights liczy i zapisuje gradient 
+    '''
 
     def fit(self, X, y):
         for iteration in range(self.num_iterations):
 
-            a1, a2 = self.forward_propagation(X)
+            activations = self.forward_propagation(X)
 
-            delta1, delta2 = self.backward_propagation(a1, a2, y)
+            deltas = self.backward_propagation(activations, y)
 
-            self.update_weights(X, a1, delta1, delta2)
+            self.update_weights(activations, deltas)
 
-            loss = self.compute_loss(y, a2)
+            loss = self.compute_loss(y, activations[-1])
             if iteration % (self.num_iterations // 10) == 0:
-                print(f"Iteration {iteration}: Loss {loss:.4f}")
+                self.cost_history.append(loss)
+                self.scores_history.append(self.score(X, y))
+
+    def show_learning_curve(self):
+        plt.plot(range(len(self.cost_history)), self.cost_history)
+        plt.xlabel("Iterations")
+        plt.ylabel("Cost")
+        plt.title("Training Cost for " + self.name)
+        self.save_chart()
+        plt.show()
 
     def predict(self, X):
-        a1, a2 = self.forward_propagation(X)
-        return np.argmax(a2, axis=1)
+        activations = self.forward_propagation(X)
+        return np.argmax(activations[-1], axis=1)
 
     def score(self, X_test, y_test):
         y_pred = self.predict(X_test)
-        # Zamień y_pred z listy klas na macierz one-hot
         num_samples = len(y_pred)
-        num_classes = len(y_test[0])
+        num_classes = self.layer_sizes[-1]
         y_pred_one_hot = np.zeros((num_samples, num_classes))
         y_pred_one_hot[np.arange(num_samples), y_pred] = 1
 
         return compute_metrics_one_hot(y_test, y_pred_one_hot)
+
+    def show_metrics(self, test_accuracy, test_precision, test_recall, test_f1):
+        accuracy_history, precision_history, recall_history, f1_history = zip(*self.scores_history)
+        iterations = range(len(self.scores_history))
+        plt.plot(iterations, accuracy_history, color='r', label="Accuracy")
+        plt.plot(iterations, precision_history, color='g', label="Precision")
+        plt.plot(iterations, recall_history, color='b', label="Recall")
+        plt.plot(iterations, f1_history, color='m', label="F1-Score")
+        plt.axhline(y=test_accuracy, color='r', linestyle='--', label="Test Accuracy")
+        plt.axhline(y=test_precision, color='g', linestyle='--', label="Test Precision")
+        plt.axhline(y=test_recall, color='b', linestyle='--', label="Test Recall")
+        plt.axhline(y=test_f1, color='m', linestyle='--', label="Test F1-Score")
+        plt.xlabel("Iterations")
+        plt.ylabel("Metric Value")
+        plt.title("Training Metrics for " + self.name)
+        plt.legend()
+        self.save_chart()
+        plt.show()
+
+    def save_chart(self):
+        plot_name = f"../media/Lab03_files/{self.name.split(' ')[0]}"
+        index = 1
+
+        while os.path.exists(f"{plot_name}_{index}.png"):
+            index += 1
+
+        new_name = f"{plot_name}_{index}.png"
+        plt.savefig(new_name)
