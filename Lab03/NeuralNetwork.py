@@ -32,7 +32,7 @@ class MLPClassifier:
     def compute_loss(self, y_true, y_pred):
         epsilon = 1e-15
         y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
-        loss = -np.sum(y_true * np.log(y_pred)) / len(y_true)
+        loss = -np.sum(y_true * np.log(y_pred))
         return loss
 
     '''
@@ -81,6 +81,33 @@ class MLPClassifier:
     
     Funkcja update_weights liczy i zapisuje gradient 
     '''
+
+    def fit_batches(self, X, y, batch_size=16):
+        num_batches = len(X) // batch_size
+
+        for i in range(self.num_iterations):
+            # Przemieszaj dane uczące
+            permutation = np.random.permutation(X.shape[0])
+            X_shuffled = X[permutation]
+            y_shuffled = y[permutation]
+
+            for batch in range(num_batches):
+                start = batch * batch_size
+                end = (batch + 1) * batch_size
+                X_batch = X_shuffled[start:end]
+                y_batch = y_shuffled[start:end]
+
+                activations = self.forward_propagation(X_batch)
+
+                deltas = self.backward_propagation(activations, y_batch)
+
+                self.update_weights(activations, deltas)
+
+            output_layer = self.forward_propagation(X_shuffled)[-1]
+            loss = self.compute_loss(y_shuffled,output_layer)
+            if i % (self.num_iterations // 10) == 0:
+                self.cost_history.append(loss)
+                self.scores_history.append(self.score(X_shuffled, y_shuffled))
 
     def fit(self, X, y):
         for iteration in range(self.num_iterations):

@@ -32,10 +32,17 @@ if __name__ == "__main__":
     hidden_layers = (16,)
 
     model = MLPClassifier(layer_sizes=[X_train.shape[1], *hidden_layers, y_train.shape[1]], num_iterations=2000,
-                          learning_rate=0.001)
+                          learning_rate=0.001,name = 'Basic MLP')
 
     X_train, X_test = normalize_data(X_train=X_train, X_test=X_test)
 
     model.fit(X_train, y_train)
     model.show_metrics(*model.score(X_test, y_test))
     model.show_learning_curve()
+
+    model_batch = MLPClassifier(layer_sizes=[X_train.shape[1], *hidden_layers, y_train.shape[1]], num_iterations=2000,
+                          learning_rate=0.001,name = 'Batch MLP')
+
+    model_batch.fit_batches(X_train, y_train)
+    model_batch.show_metrics(*model.score(X_test, y_test))
+    model_batch.show_learning_curve()
