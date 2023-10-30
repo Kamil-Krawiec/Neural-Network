@@ -923,4 +923,278 @@ Preprocessing też odgrywa ważną rolę w tym jak sprawuje się model.
 
 Nawet taki prosty model może sobie dobrze radzić z binarną klasyfikacją.
 
-#### Lab03
+## Lab03
+
+Mój kod zawierający implementacje MLP (MultiLayer Percepton) składa się
+z dwóch kalas:
+
+-   Main.py -- używany do testowania i pokazywania wyników.
+
+-   MLPClassifier.py -- zawiera implementacje MLP.
+
+Klasy korzystają też z niektórych funkcji poprzednio zdefiniowanych w
+Lab02.
+
+Funkcją aktywacji jest funkcja sigmoid.
+
+<div style="text-align:center;">
+
+$\sigma(n) = \frac{1}{1 + e^{-n}}$
+
+</div>
+
+Funkcją straty jest entropia krzyżowa.
+<div style="text-align:center;">
+    $H(y, p) = -\sum_{i} (y_i \cdot \ln(p_i))$
+</div>
+Algorytm polega na trzech kluczowych funkcjach:
+
+1.  Forward_propagation
+    1.  Zastosować wektor wejściowy x~p~=\[x~p1~, x~p2~ \...,x~pN~\]
+
+    2.  Obliczyć wartości sieciowego wejścia dla jednostek warstw
+        ukrytej: z = Sum(w\*x)
+
+    3.  Obliczyć wyjście z warstwy ukrytej: a = f(z)
+
+    4.  Przejść do warstwy wyjściowej. Obliczyć wartość sieciowego
+        wyjścia dla każdej jednostki. z~w~ = sum(w~w~\*a~w-1~)
+
+    5.  Obliczyć wyjścia y_pred = f(z~w~) jeśli to ostatnia warstwa to
+        użyć softmax.
+
+2.  Backward_propagation
+    1.  Obliczyć błąd dla jednostek wyjściowych.
+    2.  Obliczyć błędy dla jednostek ukrytych.
+3.  Update_waights
+    1. Uaktualnić wagi w warstwie wyjściowej.
+    2. Uaktualnić wagi w warstwie ukrytej.
+
+
+
+
+
+Problem który staram się sklasyfikować to czy osoba z podanymi
+parametrami jest:
+
+    - chora w stopniu - 2, 1 
+    - jest zdrowa - 0. 
+Więc moim problemem teraz jest klasyfikacja wieloklasowa.
+
+Model będzie testowany ze względu na:
+
+1.  Danych znormalizowanych i nieznormalizowanych
+
+!Po tej części będę brał pod uwagę tylko dane znormalizowane.!
+
+2.  Różnej wymiarowości warstwy ukrytej
+
+3.  Różnej wartości współczynnika uczenia
+
+4.  Różnych odchyleń standardowych przy inicjalizacji wag
+
+5.  Różnej liczby warstw
+
+### 1. Zacznę od pokazania różnic w danych znormalizowanych, surowych i zdyskretyzowanych .
+
+Hiperparametry:
+
+learning_rate = 0.001\
+num_of_iterations = 400\
+batch_size = 100\
+hidden_layers = (4,)
+
+![A graph of a graph Description automatically
+generated](media/Lab03_files/image001.png){width="2.2966010498687663in"
+height="1.7225787401574804in"} ![A graph with a line Description
+automatically generated](media/Lab03_files/image002.png){width="2.3194181977252843in"
+height="1.7396751968503936in"}![A graph with a line Description
+automatically generated](media/Lab03_files/image003.png){width="2.263737970253718in"
+height="1.697911198600175in"}
+
+![A graph of a training metrics Description automatically
+generated](media/Lab03_files/image004.png){width="2.2588188976377954in"
+height="1.6942224409448818in"}![A graph of a graph with colored lines
+Description automatically generated with medium
+confidence](media/Lab03_files/image005.png){width="2.3335870516185477in"
+height="1.7503018372703412in"} ![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image006.png){width="2.2908147419072615in"
+height="1.7182206911636047in"}
+
+Więc możemy po tym zauważyć, że dla danych znormalizowanych wyniki
+wychodzą najlepiej, na nastepnym miejscu są dane nieprzerobione. Po
+metrykach możemy zauważyć, ze model ma zbyt wiele epok, ponieważ pomimo
+spadku kosztu w trenowaniu, modele bardzo wolno się podnoszą, o ile w
+ogóle, jeśli chodzi o metryki.
+
+2.  Różnej wymiarowości warstwy ukrytej.
+
+learning_rate = 0.001\
+num_of_iterations = 2000\
+batch_size = 64\
+hidden_layers = (X,)
+
+![A graph of a training metrics Description automatically
+generated](media/Lab03_files/image007.png){width="3.1695034995625546in"
+height="2.3772790901137357in"} ![A graph of a number of layers
+Description automatically generated with medium
+confidence](media/Lab03_files/image008.png){width="3.1135772090988625in"
+height="2.3353313648293965in"} ![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image009.png){width="3.18794728783902in"
+height="2.3911122047244096in"}![A graph of a number of layers
+Description automatically generated with medium
+confidence](media/Lab03_files/image010.png){width="3.1812018810148732in"
+height="2.3860542432195975in"}
+
+![A graph of a training metrics Description automatically
+generated](media/Lab03_files/image011.png){width="3.219420384951881in"
+height="2.4147189413823273in"}![A graph of a number of layers
+Description automatically generated with medium
+confidence](media/Lab03_files/image012.png){width="3.258403324584427in"
+height="2.4439588801399825in"}
+
+Z tych testów możemy zauważyć, że większa liczba neuronów w jednej i
+jedynej warstwie ukrytej skutkuje lepszym podejmowaniem decyzji, krzywa
+uczenia schodzi niżej z kosztem, oraz model podejmuje lepsze decyzje,
+patrząc na miary.
+
+Przy 4 neuronach jego miary plasowały się pomiędzy \[0.55,0.7), a jego
+końcowy koszt był ok. 180.
+
+Przy 64 neuronach jego miary były już \>0.6, a co ważniejsze koszt był w
+okolicach 130.
+
+Przy 64\> neuronach wyniki zaczęły spadać.
+
+3.  Różnej wartości współczynnika uczenia
+
+learning_rate = X\
+num_of_iterations = 2000\
+batch_size = 64\
+hidden_layers = (64,)
+
+![A graph of a training metrics Description automatically
+generated](media/Lab03_files/image011.png){width="3.621169072615923in"
+height="2.716049868766404in"}![A graph of a number of layers Description
+automatically generated with medium
+confidence](media/Lab03_files/image012.png){width="3.6028543307086616in"
+height="2.702312992125984in"}
+
+![A graph of a training metrics Description automatically
+generated](media/Lab03_files/image013.png){width="3.607104111986002in"
+height="2.7054997812773403in"} ![A graph of a number of objects
+Description automatically generated with medium
+confidence](media/Lab03_files/image014.png){width="3.6491305774278215in"
+height="2.7370220909886265in"}
+
+![A graph of a number of data Description automatically generated with
+medium confidence](media/Lab03_files/image015.png){width="3.6083880139982503in"
+height="2.7064632545931757in"}![A graph of a graph with colored lines
+Description automatically generated with medium
+confidence](media/Lab03_files/image016.png){width="3.5762346894138233in"
+height="2.6823468941382327in"}
+
+Jak możemy zauważyć na zdjęciach, współczynnik uczenia ma wielki wpływ
+na proces uczenia.
+
+Jeśli go zwiększymy model będzie mniej stabilny, co można zauważyć na
+ostatnich zdjęciach.
+
+Krzywa uczenia często się stabilizuje, a nawet wzrasta po kolejnych
+iteracjach z dużym współczynnikiem.
+
+W tym wypadku (z tymi hiperparametrami) najepiej prezentuje się
+współczynnik \<=0.001.
+
+4.  Różnych odchyleń standardowych przy inicjalizacji wag. Tutaj
+    przetestuje losowanie wag z różnymi rozkładami. Wcześniej wagi były
+    losowane pseudolosowo czyli za pomocą funkcji rand.
+
+Kod i objaśnienie dzięki artykułowi:
+[link](https://www.linkedin.com/pulse/review-initializing-neural-network-random-weights-rambaksh-prajapati/).
+
+Teraz będę je rozlosowywał na 3 różne sposoby:
+
+-   **Losowa inicjalizacja normalna:** W tej metodzie wagi są inicjowane
+    losowo z rozkładu normalnego o określonej średniej i odchyleniu
+    standardowym. Na przykład, jeśli chcemy zainicjować wagi ze średnią
+    0 i odchyleniem standardowym 0,1.
+
+![A graph of a number of classes Description automatically generated
+with medium confidence](media/Lab03_files/image017.png){width="2.9235553368328957in"
+height="2.1928062117235347in"}![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image018.png){width="2.9289107611548557in"
+height="2.196824146981627in"}
+
+-   **Inicjalizacja Xavier:** Metoda ta została nazwana na cześć
+    badacza, który ją zaproponował, Xaviera Glorota. W tej metodzie wagi
+    są inicjowane przy użyciu rozkładu Gaussa ze średnią 0 i odchyleniem
+    standardowym sqrt(1/n), gdzie n to liczba neuronów wejściowych.
+    Inicjalizacja Xaviera jest skuteczna, gdy funkcja aktywacji jest
+    tangensem hiperbolicznym lub funkcją sigmoidalną.
+
+![A graph of a graph Description automatically
+generated](media/Lab03_files/image019.png){width="3.2906780402449693in"
+height="2.468166010498688in"}![A graph of a training metrics Description
+automatically generated](media/Lab03_files/image020.png){width="3.233508311461067in"
+height="2.4252865266841646in"}
+
+-   **Inicjalizacja He:** Nazwa tej metody pochodzi od nazwiska badacza,
+    który ją zaproponował, Kaiming He. W tej metodzie wagi są inicjowane
+    przy użyciu rozkładu Gaussa ze średnią 0 i odchyleniem standardowym
+    sqrt(2/n), gdzie n to liczba neuronów wejściowych. Inicjalizacja He
+    jest skuteczna, gdy funkcja aktywacji jest funkcją ReLU.
+
+![A graph of a number of classes Description automatically generated
+with medium confidence](media/Lab03_files/image021.png){width="3.448856080489939in"
+height="2.5868055555555554in"}![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image022.png){width="3.4148173665791774in"
+height="2.56127624671916in"}
+
+Jak możemy zauważyć wszystkie modele podobnie się reprezentują, z tą
+liczbą epok każdy model jest w stanie się naprostować i skorygować swoje
+wagi. Jednak przy dobrze dobranej metodzie inicjalizacji wag, widzimy:
+
+-   Niższy startowy koszt, funkcji straty.
+
+-   Wyższe początkowe miary.
+
+Są to ważne rzeczy, jeśli nasz model ma ograniczony czas uczenia.
+
+5.  Różnej liczby warstw
+
+![A graph of a number of layers Description automatically generated with
+medium confidence](media/Lab03_files/image023.png){width="3.436910542432196in"
+height="2.5778488626421696in"} ![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image024.png){width="3.4478324584426945in"
+height="2.586038932633421in"}
+
+![A graph with a line Description automatically
+generated](media/Lab03_files/image025.png){width="3.4150404636920384in"
+height="2.5614435695538056in"}![A graph of a training metrics
+Description automatically
+generated](media/Lab03_files/image026.png){width="3.4776979440069993in"
+height="2.6084405074365704in"}
+
+![A graph of a number of layers Description automatically
+generated](media/Lab03_files/image027.png){width="3.549314304461942in"
+height="2.6621555118110236in"}![A graph of training metrics Description
+automatically generated](media/Lab03_files/image028.png){width="3.576268591426072in"
+height="2.682373140857393in"}
+
+![A graph of a number of layers Description automatically generated with
+medium confidence](media/Lab03_files/image029.png){width="3.2840977690288713in"
+height="2.4632294400699912in"}![A graph of a training performance
+Description automatically generated with medium
+confidence](media/Lab03_files/image030.png){width="3.2963965441819774in"
+height="2.4724551618547683in"}
+
+Można po tym zauważyć, że wielkość, jak i ilość warstw ma znaczenie.
+Większa ilość warstw pozwala zoptymalizować koszt jak i poprawić jakość
+metryk. Jednak zbyt wielka ilość neuronów i warstw może źle wpłynąć na
+model, który po prostu zapamięta rozwiązania nie generalizując.
