@@ -901,9 +901,9 @@ batch_size= 128
 
 | Obraz 1                                | Obraz 2                                | Obraz 3                                | Obraz 4                                |
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
-| ![Obraz 1](media/Lab02_files/normalize_data_1.png) | ![Obraz 2](media/Lab02_files/normalize_data_2.png) | ![Obraz 3](media/Lab02_files/normalize_data_3.png) | ![Obraz 4](media/Lab02_files/normalize_data_4.png) |
+| ![Obraz 1](./media/Lab02_files/normalize_data_1.png) | ![Obraz 2](media/Lab02_files/normalize_data_2.png) | ![Obraz 3](media/Lab02_files/normalize_data_3.png) | ![Obraz 4](./media/Lab02_files/normalize_data_4.png) |
 | Obraz 5                                | Obraz 6                                | Obraz 7                                | Obraz 8                                |
-| ![Obraz 5](media/Lab02_files/normalize_data_5.png) | ![Obraz 6](media/Lab02_files/normalize_data_6.png) | ![Obraz 7](media/Lab02_files/normalize_data_7.png) | ![Obraz 8](media/Lab02_files/normalize_data_8.png) |
+| ![Obraz 5](media/Lab02_files/normalize_data_5.png) | ![Obraz 6](media/Lab02_files/normalize_data_6.png) | ![Obraz 7](media/Lab02_files/normalize_data_7.png) | ![Obraz 8](./media/Lab02_files/normalize_data_8.png) |
 
 W tym przypadku możemy zauważyć, że jest zdecydowanie mniej iteracji bo
 tylko 60 i model się stabilizuje, w przypadku paczkowania pomimo braku
@@ -1143,22 +1143,23 @@ Są to ważne rzeczy, jeśli nasz model ma ograniczony czas uczenia.
 
 | Obraz 1                                       | Obraz 2                                      |
 |-----------------------------------------------|----------------------------------------------|
-| ![png](media/Lab03_files/image023.png)        | ![png](media/Lab03_files/image024.png)       |
+| ![png](./media/Lab03_files/image023.png)        | ![png](./media/Lab03_files/image024.png)       |
 
 | Obraz 3                                       | Obraz 4                                      |
 |-----------------------------------------------|----------------------------------------------|
-| ![png](media/Lab03_files/image025.png)        | ![png](media/Lab03_files/image026.png)       |
+| ![png](./media/Lab03_files/image025.png)        | ![png](./media/Lab03_files/image026.png)       |
 
 | Obraz 5                                       | Obraz 6                                      |
 |-----------------------------------------------|----------------------------------------------|
-| ![png](media/Lab03_files/image027.png)        | ![png](media/Lab03_files/image028.png)       |
+| ![png](./media/Lab03_files/image027.png)        | ![png](./media/Lab03_files/image028.png)       |
 
 | Obraz 7                                       | Obraz 8                                      |
 |-----------------------------------------------|----------------------------------------------|
-| ![png](media/Lab03_files/image029.png)        | ![png](media/Lab03_files/image030.png)       |
+| ![png](./media/Lab03_files/image029.png)        | ![png](./media/Lab03_files/image030.png)       |
 
 
 Można po tym zauważyć, że wielkość, jak i ilość warstw ma znaczenie.
 Większa ilość warstw pozwala zoptymalizować koszt jak i poprawić jakość
 metryk. Jednak zbyt wielka ilość neuronów i warstw może źle wpłynąć na
 model, który po prostu zapamięta rozwiązania nie generalizując.
+
