@@ -1163,3 +1163,4 @@ Większa ilość warstw pozwala zoptymalizować koszt jak i poprawić jakość
 metryk. Jednak zbyt wielka ilość neuronów i warstw może źle wpłynąć na
 model, który po prostu zapamięta rozwiązania nie generalizując.
 
+![png](./media/Lab03_files/test.png) 
