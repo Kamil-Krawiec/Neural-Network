@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from Lab02.Distribution import *
-from Lab02.Functions import normalize_data, discretize_data, basic_data
+from Functions import normalize_data, discretize_data, basic_data
 from Lab02.NeuralNetwork import NeuralNetwork
 
 

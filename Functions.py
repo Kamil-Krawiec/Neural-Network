@@ -1,5 +1,19 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import StandardScaler, KBinsDiscretizer
+import numpy as np
+
+def initialize_weights_normal(shape,n_inputs):
+    return np.random.normal(loc=0.0, scale=0.1, size=shape)
+
+
+def initialize_weights_xavier(shape, n_inputs):
+    stddev = np.sqrt(1 / n_inputs)
+    return np.random.normal(loc=0.0, scale=stddev, size=shape)
+
+
+def initialize_weights_he(shape, n_inputs):
+    stddev = np.sqrt(2 / n_inputs)
+    return np.random.normal(loc=0.0, scale=stddev, size=shape)
 
 
 def compute_metrics(y_true, y_pred):
@@ -18,6 +32,8 @@ def compute_metrics_one_hot(y_test, y_pred):
     f1 = f1_score(y_test, y_pred, average='macro')
 
     return accuracy, precision, recall, f1
+
+
 def normalize_data(X_train, X_test):
     # Inicjalizacja obiektu do normalizacji
     scaler = StandardScaler()

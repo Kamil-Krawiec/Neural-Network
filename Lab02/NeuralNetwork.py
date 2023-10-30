@@ -1,11 +1,10 @@
 import os
-import random
 
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.special import expit
 
-from Lab02.Functions import compute_metrics
+from Functions import compute_metrics
 
 
 class NeuralNetwork:
