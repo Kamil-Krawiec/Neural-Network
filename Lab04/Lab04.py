@@ -88,7 +88,7 @@ if __name__ == "__main__":
     optimizers = [
         ('SGD', torch.optim.SGD),# SGD (Stochastic Gradient Descent)
         ('Adam', torch.optim.Adam), # Adam (Adaptive Moment Estimation):
-        ('RMSprop', torch.optim.RMSprop)# RMSprop (Root Mean Square Propagation)
+        ('RMSProp', torch.optim.RMSprop)# RMSProp (Root Mean Square Propagation)
     ]
 
     for optimizer_name, optimizer_type in optimizers:
