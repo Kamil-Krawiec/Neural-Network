@@ -1219,7 +1219,6 @@ W tej sekcji przedstawione są wykresy i wyniki metryk dla modelu "RMSProp" z ro
 | **SGD**     | ![SGD Train 32](media/Lab04_files/SGD/train/32_0.001.jpg)  | ![SGD Train 64](media/Lab04_files/SGD/train/64_0.001.jpg)  |
 | **RMSProp** | ![RMSProp Train 32](media/Lab04_files/RMSProp/train/32_0.001.jpg) | ![RMSProp Train 64](media/Lab04_files/RMSProp/train/64_0.001.jpg) |
 
-
 ### Wyniki dla Rozmiaru Batcha: 32 i 64, Wartość LR: 0.1, 0.01, 0.001
 
 #### Test
