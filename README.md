@@ -1162,3 +1162,104 @@ Można po tym zauważyć, że wielkość, jak i ilość warstw ma znaczenie.
 Większa ilość warstw pozwala zoptymalizować koszt jak i poprawić jakość
 metryk. Jednak zbyt wielka ilość neuronów i warstw może źle wpłynąć na
 model, który po prostu zapamięta rozwiązania nie generalizując.
+
+
+## Lab04
+# Analiza Wyników Eksperymentów
+
+W ramach analizy przeprowadzono eksperymenty z wykorzystaniem trzech różnych modeli: "Adam," "SGD," i "RMSProp," różnych rozmiarów batcha oraz trzech różnych wartości współczynnika uczenia (0.1, 0.01, 0.001). Poniżej przedstawiamy wyniki eksperymentów podzielone na kategorie.
+
+## Podział na Modele
+
+### Rozmiar Batcha: 32, Wartość LR: 0.001
+
+#### Adam
+
+| Krzywa Metryk | Krzywa Kosztu Treningu                                           | Wyniki Metryk                                                     |
+|--------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| ![Adam Metrics](media/Lab04_files/Adam/metrics/32_0.001.jpg) | ![Adam Training Cost](media/Lab04_files/Adam/train/32_0.001.jpg) | ![Adam Metrics Results](media/Lab04_files/Adam/test/32_0.001.jpg) |
+
+W tej sekcji przedstawione są wykresy i wyniki metryk dla modelu "Adam" z rozmiarem batcha 32 i wartością learning rate 0.001. Dokładność, F1, Precyzja i Odzysk zostały wyznaczone na podstawie wyników eksperymentu.
+
+#### SGD
+
+| Krzywa Metryk | Krzywa Kosztu Treningu                                           | Wyniki Metryk                                                     |
+|--------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| ![SGD Metrics](media/Lab04_files/SGD/metrics/32_0.001.jpg) | ![SGD Training Cost](media/Lab04_files/SGD/train/32_0.001.jpg) | ![SGD Metrics Results](media/Lab04_files/SGD/test/32_0.001.jpg) |
+
+W tej sekcji przedstawione są wykresy i wyniki metryk dla modelu "SGD" z rozmiarem batcha 32 i wartością learning rate 0.001. Dokładność, F1, Precyzja i Odzysk zostały wyznaczone na podstawie wyników eksperymentu.
+
+#### RMSProp
+
+| Krzywa Metryk | Krzywa Kosztu Treningu                                               | Wyniki Metryk                                                         |
+|--------------|----------------------------------------------------------------------|-----------------------------------------------------------------------|
+| ![RMSProp Metrics](media/Lab04_files/RMSProp/metrics/32_0.001.jpg) | ![RMSProp Training Cost](media/Lab04_files/RMSProp/train/32_0.001.jpg) | ![RMSProp Metrics Results](media/Lab04_files/RMSProp/test/32_0.001.jpg) |
+
+W tej sekcji przedstawione są wykresy i wyniki metryk dla modelu "RMSProp" z rozmiarem batcha 32 i wartością learning rate 0.001. Dokładność, F1, Precyzja i Odzysk zostały wyznaczone na podstawie wyników eksperymentu.
+
+## Podział na Rozmiar Batcha
+
+### Wyniki dla Rozmiaru Batcha: 32 i 64, Wartość LR: 0.001
+
+#### Test
+
+|              | Rozmiar Batcha: 32 | Rozmiar Batcha: 64 |
+|--------------|--------------------|--------------------|
+| **Adam**    | ![Adam Test 32](media/Lab04_files/Adam/test/32_0.001.jpg) | ![Adam Test 64](media/Lab04_files/Adam/test/64_0.001.jpg) |
+| **SGD**     | ![SGD Test 32](media/Lab04_files/SGD/test/32_0.001.jpg)  | ![SGD Test 64](media/Lab04_files/SGD/test/64_0.001.jpg)  |
+| **RMSProp** | ![RMSProp Test 32](media/Lab04_files/RMSProp/test/32_0.001.jpg) | ![RMSProp Test 64](media/Lab04_files/RMSProp/test/64_0.001.jpg) |
+
+### Wyniki dla Rozmiaru Batcha: 32 i 64, Wartość LR: 0.001
+
+#### Trening
+
+|              | Rozmiar Batcha: 32 | Rozmiar Batcha: 64 |
+|--------------|--------------------|--------------------|
+| **Adam**    | ![Adam Train 32](media/Lab04_files/Adam/train/32_0.001.jpg) | ![Adam Train 64](media/Lab04_files/Adam/train/64_0.001.jpg) |
+| **SGD**     | ![SGD Train 32](media/Lab04_files/SGD/train/32_0.001.jpg)  | ![SGD Train 64](media/Lab04_files/SGD/train/64_0.001.jpg)  |
+| **RMSProp** | ![RMSProp Train 32](media/Lab04_files/RMSProp/train/32_0.001.jpg) | ![RMSProp Train 64](media/Lab04_files/RMSProp/train/64_0.001.jpg) |
+
+
+### Wyniki dla Rozmiaru Batcha: 32 i 64, Wartość LR: 0.1, 0.01, 0.001
+
+#### Test
+
+|              | Rozmiar Batcha: 32 | Rozmiar Batcha: 64 |
+|--------------|--------------------|--------------------|
+| **Adam (LR=0.1)** | ![Adam Test 32 LR=0.1](media/Lab04_files/Adam/test/32_0.1.jpg) | ![Adam Test 64 LR=0.1](media/Lab04_files/Adam/test/64_0.1.jpg) |
+| **Adam (LR=0.01)** | ![Adam Test 32 LR=0.01](media/Lab04_files/Adam/test/32_0.01.jpg) | ![Adam Test 64 LR=0.01](media/Lab04_files/Adam/test/64_0.01.jpg) |
+| **Adam (LR=0.001)** | ![Adam Test 32 LR=0.001](media/Lab04_files/Adam/test/32_0.001.jpg) | ![Adam Test 64 LR=0.001](media/Lab04_files/Adam/test/64_0.001.jpg) |
+| **SGD (LR=0.1)**  | ![SGD Test 32 LR=0.1](media/Lab04_files/SGD/test/32_0.1.jpg)  | ![SGD Test 64 LR=0.1](media/Lab04_files/SGD/test/64_0.1.jpg)  |
+| **SGD (LR=0.01)**  | ![SGD Test 32 LR=0.01](media/Lab04_files/SGD/test/32_0.01.jpg)  | ![SGD Test 64 LR=0.01](media/Lab04_files/SGD/test/64_0.01.jpg)  |
+| **SGD (LR=0.001)**  | ![SGD Test 32 LR=0.001](media/Lab04_files/SGD/test/32_0.001.jpg)  | ![SGD Test 64 LR=0.001](media/Lab04_files/SGD/test/64_0.001.jpg)  |
+| **RMSProp (LR=0.1)** | ![RMSProp Test 32 LR=0.1](media/Lab04_files/RMSProp/test/32_0.1.jpg) | ![RMSProp Test 64 LR=0.1](media/Lab04_files/RMSProp/test/64_0.1.jpg) |
+| **RMSProp (LR=0.01)** | ![RMSProp Test 32 LR=0.01](media/Lab04_files/RMSProp/test/32_0.01.jpg) | ![RMSProp Test 64 LR=0.01](media/Lab04_files/RMSProp/test/64_0.01.jpg) |
+| **RMSProp (LR=0.001)** | ![RMSProp Test 32 LR=0.001](media/Lab04_files/RMSProp/test/32_0.001.jpg) | ![RMSProp Test 64 LR=0.001](media/Lab04_files/RMSProp/test/64_0.001.jpg) |
+
+
+### Wyniki dla Rozmiaru Batcha: 32 i 64, Wartość LR: 0.1, 0.01, 0.001
+
+
+#### Metryki
+
+Poniżej przedstawiam wyniki analizy metryk z uwzględnieniem różnych rozmiarów batcha oraz różnych wartości współczynnika uczenia (0.1, 0.01, 0.001).
+##### Wartość LR: 0.1
+
+|              | Model: Adam       | Model: SGD        | Model: RMSProp    |
+|--------------|-------------------|-------------------|-------------------|
+| Rozmiar Batcha: 32 | ![Adam Metrics 32 LR=0.1](media/Lab04_files/Adam/metrics/32_0.1.jpg) | ![SGD Metrics 32 LR=0.1](media/Lab04_files/SGD/metrics/32_0.1.jpg) | ![RMSProp Metrics 32 LR=0.1](media/Lab04_files/RMSProp/metrics/32_0.1.jpg) |
+| Rozmiar Batcha: 64 | ![Adam Metrics 64 LR=0.1](media/Lab04_files/Adam/metrics/64_0.1.jpg) | ![SGD Metrics 64 LR=0.1](media/Lab04_files/SGD/metrics/64_0.1.jpg) | ![RMSProp Metrics 64 LR=0.1](media/Lab04_files/RMSProp/metrics/64_0.1.jpg) |
+ 
+##### Wartość LR: 0.01
+
+|              | Model: Adam       | Model: SGD        | Model: RMSProp    |
+|--------------|-------------------|-------------------|-------------------|
+| Rozmiar Batcha: 32 | ![Adam Metrics 32 LR=0.01](media/Lab04_files/Adam/metrics/32_0.01.jpg) | ![SGD Metrics 32 LR=0.01](media/Lab04_files/SGD/metrics/32_0.01.jpg) | ![RMSProp Metrics 32 LR=0.01](media/Lab04_files/RMSProp/metrics/32_0.01.jpg) |
+| Rozmiar Batcha: 64 | ![Adam Metrics 64 LR=0.01](media/Lab04_files/Adam/metrics/64_0.01.jpg) | ![SGD Metrics 64 LR=0.01](media/Lab04_files/SGD/metrics/64_0.01.jpg) | ![RMSProp Metrics 64 LR=0.01](media/Lab04_files/RMSProp/metrics/64_0.01.jpg) |
+ 
+##### Wartość LR: 0.001
+
+|              | Model: Adam       | Model: SGD        | Model: RMSProp    |
+|--------------|-------------------|-------------------|-------------------|
+| Rozmiar Batcha: 32 | ![Adam Metrics 32 LR=0.001](media/Lab04_files/Adam/metrics/32_0.001.jpg) | ![SGD Metrics 32 LR=0.001](media/Lab04_files/SGD/metrics/32_0.001.jpg) | ![RMSProp Metrics 32 LR=0.001](media/Lab04_files/RMSProp/metrics/32_0.001.jpg) |
+| Rozmiar Batcha: 64 | ![Adam Metrics 64 LR=0.001](media/Lab04_files/Adam/metrics/64_0.001.jpg) | ![SGD Metrics 64 LR=0.001](media/Lab04_files/SGD/metrics/64_0.001.jpg) | ![RMSProp Metrics 64 LR=0.001](media/Lab04_files/RMSProp/metrics/64_0.001.jpg) |
