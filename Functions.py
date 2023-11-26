@@ -139,51 +139,31 @@ def show_learning_curve(train_cost_history, test_cost_history, name=''):
     plt.title(wrapped_title)
     plt.legend()
 
-    save_chart_lab05(name)
+    save_chart(name)
     plt.show()
 
 def save_chart(name):
     # Split the name into parts
     parts = name.split('_')
 
+    # ChanN_X_kernelSize_Y_PoolSize_Z_BlurTest_A_BlurTrain_B
     # Extract the relevant parts
-    model = parts[1]
-    batch_size = parts[3]
-    learning_rate = parts[5]
-    what = parts[6]
+    num_channels = parts[1]
+    kernel_size = parts[3]
+    pool_size = parts[5]
+    gaussian_blur_test = parts[7]
+    gaussian_blur_train = parts[9]
+
 
     # Construct the directory structure
-    directory_name = f"{what}"
-    save_directory = f"../media/Lab04_files/{model}/{directory_name}"
+
+    save_directory = f"../media/Lab06_files/"
 
     # Check if the directory exists, if not, create it
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
 
     # Move the saved chart to the appropriate directory
-    new_name = os.path.join(save_directory, f"{batch_size}_{learning_rate}.jpg")
+    new_name = os.path.join(save_directory, f"{name}.jpg")
     plt.savefig(new_name)
 
-def save_chart_lab05(name):
-    # Split the name into parts
-    parts = name.split('_')
-
-    # Extract the relevant parts
-    hidden_size = parts[1]
-    train_size = parts[3]
-    batch_size = parts[5]
-    test_noise = parts[9]
-    train_noise = parts[11]
-
-
-    # Construct the directory structure
-    directory_name = f"hs_{hidden_size}_ts_{train_size}_bs_{batch_size}"
-    save_directory = f"../media/Lab05_files/{directory_name}"
-
-    # Check if the directory exists, if not, create it
-    if not os.path.exists(save_directory):
-        os.makedirs(save_directory)
-
-    # Move the saved chart to the appropriate directory
-    new_name = os.path.join(save_directory, f"{directory_name}_{test_noise}_{train_noise}.jpg")
-    plt.savefig(new_name)
