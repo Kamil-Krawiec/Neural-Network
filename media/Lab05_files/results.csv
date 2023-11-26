@@ -1,0 +1,5 @@
+hidden_size,train_size,batch_size,test_noise,train_noise,accuracy,train_size_percentage,epochs
+[10],0.2,512,False,False,0.6260625,0.2,15
+[10],0.2,512,True,True,0.6207291666666667,0.2,15
+[10],0.2,1024,False,False,0.42170833333333335,0.2,15
+[10],0.2,1024,True,True,0.39179166666666665,0.2,15

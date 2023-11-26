@@ -84,7 +84,7 @@ def show_metrics(test_accuracy, test_precision, test_recall, test_f1, name='', s
     plt.title(wrapped_title)
     plt.legend(loc='lower right')
     plt.subplots_adjust(top=0.85)
-    save_chart(name)
+    save_chart_lab05(name)
     plt.show()
 
 
@@ -121,6 +121,26 @@ def show_learning_curve(cost_history, name=''):
     save_chart(name)
     plt.show()
 
+def show_learning_curve(train_cost_history, test_cost_history, name=''):
+    plt.figure(figsize=(10, 6))
+
+    # Plot the original training cost history in blue
+    plt.plot(range(len(train_cost_history)), train_cost_history, color='blue', label='Training Curve')
+
+    # Plot the original testing cost history in red
+    plt.plot(range(len(test_cost_history)), test_cost_history, color='red', label='Testing Curve')
+
+    plt.xlabel("Iterations")
+    plt.ylabel("Cost")
+
+    max_title_width = 40
+    title = "Learning and Testing Curve " + name
+    wrapped_title = textwrap.fill(title, max_title_width)
+    plt.title(wrapped_title)
+    plt.legend()
+
+    save_chart_lab05(name)
+    plt.show()
 
 def save_chart(name):
     # Split the name into parts
@@ -142,4 +162,28 @@ def save_chart(name):
 
     # Move the saved chart to the appropriate directory
     new_name = os.path.join(save_directory, f"{batch_size}_{learning_rate}.jpg")
+    plt.savefig(new_name)
+
+def save_chart_lab05(name):
+    # Split the name into parts
+    parts = name.split('_')
+
+    # Extract the relevant parts
+    hidden_size = parts[1]
+    train_size = parts[3]
+    batch_size = parts[5]
+    test_noise = parts[9]
+    train_noise = parts[11]
+
+
+    # Construct the directory structure
+    directory_name = f"hs_{hidden_size}_ts_{train_size}_bs_{batch_size}"
+    save_directory = f"../media/Lab05_files/{directory_name}"
+
+    # Check if the directory exists, if not, create it
+    if not os.path.exists(save_directory):
+        os.makedirs(save_directory)
+
+    # Move the saved chart to the appropriate directory
+    new_name = os.path.join(save_directory, f"{directory_name}_{test_noise}_{train_noise}.jpg")
     plt.savefig(new_name)

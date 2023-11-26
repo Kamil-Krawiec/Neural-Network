@@ -120,7 +120,7 @@ class MLPClassifier:
                 self.cost_history.append(loss)
                 self.scores_history.append(self.score(X_shuffled, y_shuffled))
 
-    '''Uczy model na całym zbiorze danych.'''
+    '''Uczy model_predict na całym zbiorze danych.'''
     def fit(self, X, y):
         for iteration in range(self.num_iterations):
 

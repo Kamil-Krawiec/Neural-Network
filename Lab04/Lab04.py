@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
                 model = TorchMLPClassifier(input_size=X_train.shape[1], hidden_sizes=hidden_sizes, output_size=3)
                 optimizer = optimizer_type(model.parameters(), lr=learning_rate)
-                criterion = nn.BCEWithLogitsLoss()  # Specify your loss criterion here
+                criterion = nn.BCEWithLogitsLoss()  # Binary Cross Entropy with Logits Loss
 
                 cost, test_cost, scores_history = train_model(model, optimizer, X_train, y_train, X_test, y_test,
                                                               num_iterations=num_iterations, batch_size=batch_size,
