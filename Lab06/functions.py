@@ -1,7 +1,7 @@
 import time
 
 import torch
-from sklearn.metrics import precision_score, f1_score
+from sklearn.metrics import precision_score, f1_score,recall_score
 from torch import nn
 from torch import optim
 from torch.autograd import Variable
@@ -84,7 +84,6 @@ def evaluate_model(model, test_loader):
     accuracy = correct / total
     precision = precision_score(all_labels, all_predictions, average='weighted')
     f1 = f1_score(all_labels, all_predictions, average='weighted')
+    recall = recall_score(all_labels,all_predictions,average='weighted')
 
-    print(f'Accuracy: {accuracy:.4f}')
-    print(f'Precision: {precision:.4f}')
-    print(f'F1 Score: {f1:.4f}')
+    return accuracy,precision,f1,recall

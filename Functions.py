@@ -121,8 +121,8 @@ def show_learning_curve(cost_history, name=''):
     save_chart(name)
     plt.show()
 
-def show_learning_curve(train_cost_history, test_cost_history, name=''):
-    plt.figure(figsize=(10, 6))
+def show_learning_curve(train_cost_history, test_cost_history, name='',acc=0,prec=0,rec=0,f1=0):
+    plt.figure(figsize=(15, 10))
 
     # Plot the original training cost history in blue
     plt.plot(range(len(train_cost_history)), train_cost_history, color='blue', label='Training Curve')
@@ -139,6 +139,17 @@ def show_learning_curve(train_cost_history, test_cost_history, name=''):
     plt.title(wrapped_title)
     plt.legend()
 
+    # Add text below the chart
+    # Add table below the chart
+    table_data = [['Accuracy', round(acc, 2)],
+                  ['Recall', round(rec, 2)],
+                  ['F1 Score', round(f1, 2)],
+                  ['Precision', round(prec, 2)]]
+
+    plt.table(cellText=table_data, loc='bottom', colLabels=['Metric', 'Value'], cellLoc='center', bbox=[0, -0.3, 1, 0.2],fontsize=12)
+    plt.subplots_adjust(bottom=0.3)
+
+    # Save and display the chart
     save_chart(name)
     plt.show()
 
