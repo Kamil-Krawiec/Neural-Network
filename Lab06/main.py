@@ -14,9 +14,9 @@ def run_tests():
     default_batch_size = 100
 
     # Parametry do przetestowania
-    out_channels_values = [32,126]
-    kernel_size_values = [10,15]
-    pool_size_values = [20,10]
+    out_channels_values = [32, 126]
+    kernel_size_values = [9]
+    pool_size_values = [20, 10]
 
     for out_channels in out_channels_values:
         for kernel_size in kernel_size_values:
@@ -33,7 +33,7 @@ def run_tests():
                 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
                 train_data = datasets.FashionMNIST('path', download=True, train=True, transform=transform_blur)
-                test_data = datasets.FashionMNIST('path', download=True, train=False, transform=transform)
+                test_data = datasets.FashionMNIST('path', download=True, train=False, transform=transform_blur)
 
                 train_list = list(range(len(train_data)))
                 random.shuffle(train_list)
@@ -70,7 +70,7 @@ def run_tests():
 
                 acc, prec, f1, rec = evaluate_model(cnn_model, test_loader)
 
-                name = f"ChanN_{out_channels}_kernelSize_{kernel_size}_PoolSize_{pool_size}_BlurTest_{False}_BlurTrain_{True}"
+                name = f"ChanN_{out_channels}_kernelSize_{kernel_size}_PoolSize_{pool_size}_BlurTest_{True}_BlurTrain_{True}"
                 show_learning_curve(train_cost_history=training_losses, test_cost_history=test_losses, name=name,
                                     acc=acc, rec=rec, prec=prec, f1=f1)
 

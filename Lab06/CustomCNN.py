@@ -6,7 +6,6 @@ class CustomCNN(nn.Module):
     def __init__(self, out_channels, kernel_size, pool_size):
         super(CustomCNN, self).__init__()
 
-        # Convolutional layer with adjustable parameters
         self.conv_block = nn.Sequential(
             nn.Conv2d(1, out_channels, kernel_size=kernel_size, stride=1, padding=1),
             nn.LeakyReLU(),

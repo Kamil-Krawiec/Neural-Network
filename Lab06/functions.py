@@ -1,12 +1,13 @@
 import time
 
 import torch
-from sklearn.metrics import precision_score, f1_score,recall_score
+from sklearn.metrics import precision_score, f1_score, recall_score
 from torch import nn
 from torch import optim
 from torch.autograd import Variable
 
 seed = 42
+
 
 def train(model, criterion, data_loader, test_loader, epochs):
     model.apply(init_normal)
@@ -84,6 +85,6 @@ def evaluate_model(model, test_loader):
     accuracy = correct / total
     precision = precision_score(all_labels, all_predictions, average='weighted')
     f1 = f1_score(all_labels, all_predictions, average='weighted')
-    recall = recall_score(all_labels,all_predictions,average='weighted')
+    recall = recall_score(all_labels, all_predictions, average='weighted')
 
-    return accuracy,precision,f1,recall
+    return accuracy, precision, f1, recall

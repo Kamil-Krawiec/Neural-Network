@@ -157,18 +157,10 @@ def save_chart(name):
     # Split the name into parts
     parts = name.split('_')
 
-    # ChanN_X_kernelSize_Y_PoolSize_Z_BlurTest_A_BlurTrain_B
-    # Extract the relevant parts
-    num_channels = parts[1]
-    kernel_size = parts[3]
-    pool_size = parts[5]
-    gaussian_blur_test = parts[7]
-    gaussian_blur_train = parts[9]
-
 
     # Construct the directory structure
 
-    save_directory = f"../media/Lab06_files/"
+    save_directory = f"../media/Lab07_files/"
 
     # Check if the directory exists, if not, create it
     if not os.path.exists(save_directory):
